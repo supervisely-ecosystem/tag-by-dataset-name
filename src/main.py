@@ -19,9 +19,7 @@ def tag_dataset(
         api.project.update_meta(project_id, project_meta)
     if tag_meta.value_type != sly.TagValueType.NONE:
         sly.logger.error(
-            "TagMeta already exist in ProjectMeta but TagValueType is not NONE. Wrong TagValueType: %s",
-            tag_meta.value_type,
-            exc_info=1,
+            f'TagMeta already exist in ProjectMeta but TagValueType is not "{sly.TagValueType.NONE}". Wrong TagValueType: "{tag_meta.value_type}"'
         )
         raise ValueError(tag_meta.value_type)
 
