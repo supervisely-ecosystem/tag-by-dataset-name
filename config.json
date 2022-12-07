@@ -10,7 +10,7 @@
   ],
   "icon": "",
   "poster": "",
-  "entrypoint": "python main.py",
+  "entrypoint": "python src/main.py",
   "context_menu": {
     "target": ["images_project", "images_dataset"],
     "context_root": "Transform"
