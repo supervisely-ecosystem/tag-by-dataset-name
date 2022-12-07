@@ -3,45 +3,32 @@ from dotenv import load_dotenv
 import supervisely as sly
 
 
-def tag_dataset(dataset: sly.DatasetInfo, project_id: int, project_meta: sly.ProjectMeta, api: sly.Api):
+def tag_dataset(api: sly.Api, dataset: sly.DatasetInfo, project_id: int, project_meta: sly.ProjectMeta):
     """Adds dataset name tag to all images in dataset"""
-    TAG_TYPES_NULL_VALUES = {
-        'any_number': 0,
-        'any_string': '',
-        'none': None,
-    }
-
+    
+    # Get or Create TagMeta
     tag_meta = project_meta.get_tag_meta(dataset.name)
-    # If tag meta does not exist we create new
     if tag_meta is None:
         tag_meta = sly.TagMeta(dataset.name, sly.TagValueType.NONE)
         project_meta = project_meta.add_tag_meta(tag_meta)
         api.project.update_meta(project_id, project_meta)
-
-    # Get tag value based on tag meta type
-    if tag_meta.possible_values:
-        tag_value = tag_meta.possible_values[0]
-    else:
-        tag_value = TAG_TYPES_NULL_VALUES[tag_meta.value_type]
-
-    # create tag
-    tag = sly.Tag(tag_meta, value=tag_value)
+    if tag_meta.value_type != 'none':
+        sly.logger.error('Invalid TagMeta Value Type')
+        raise ValueError(tag_meta.value_type)
     
-    # load/create annotation for each image
-    anns = api.annotation.get_list(dataset.id)
-    img_ann = {ann.image_id:ann for ann in anns}
-    for image_info in api.image.get_list(dataset.id):
-        ann = img_ann.get(image_info.id, None)
-        if ann is None:
-            ann = sly.Annotation(image_info.size, img_tags=[tag])
-        else:
-            ann = sly.Annotation.from_json(ann.annotation, project_meta)
-            if not tag in ann.img_tags:
-                ann = ann.add_tag(tag)
-        img_ann[image_info.id] = ann
+    # Create Tag
+    tag = sly.Tag(tag_meta, value=None)
 
-    # bulk upload annotations for all images
-    api.annotation.upload_anns(*zip(*img_ann.items()))
+    # Get Images Ids and Annotations
+    img_ids = [img.id for img in api.image.get_list(dataset.id)]
+    ann_jsons = api.annotation.download_json_batch(dataset.id, img_ids)
+    anns = [sly.Annotation.from_json(ann_json, project_meta) for ann_json in ann_jsons]
+    
+    # Update Annotations
+    anns = [ann if tag in ann.img_tags else ann.add_tag(tag) for ann in anns]
+    
+    # Upload updated annotations
+    api.annotation.upload_anns(img_ids, anns)
 
 
 if __name__ == '__main__':
@@ -51,14 +38,13 @@ if __name__ == '__main__':
 
     api: sly.Api = sly.Api.from_env()
     project_id = sly.env.project_id()
-    project_meta = api.project.get_meta(project_id)
-    project_meta = sly.ProjectMeta.from_json(project_meta)
+    project_meta_json = api.project.get_meta(project_id)
+    project_meta = sly.ProjectMeta.from_json(project_meta_json)
 
-    dataset_id = sly.env.dataset_id()
+    dataset_id = sly.env.dataset_id(False)
     if dataset_id is None:
         for dataset in api.dataset.get_list(project_id):
-            tag_dataset(dataset, project_id, project_meta, api)
+            tag_dataset(api, dataset, project_id, project_meta)
     else:
         dataset = api.dataset.get_info_by_id(dataset_id)
-        tag_dataset(dataset, project_id, project_meta, api)
-
+        tag_dataset(api, dataset, project_id, project_meta)
