@@ -4,18 +4,8 @@
     "**/__pycache__": true,
     ".venv": true,
   },
-  "black-formatter.args": [
-    "--line-length",
-    "100"
-  ],
-  "black-formatter.showNotification": "off",
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": false,
-    "editor.formatOnType": true,
-  },
-  "python.formatting.provider": "none",
+  "python.formatting.provider": "black",
+  "debug.inlineValues": "off",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "editor.formatOnType": true,
