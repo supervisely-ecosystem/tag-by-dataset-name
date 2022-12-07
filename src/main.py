@@ -12,8 +12,8 @@ def tag_dataset(api: sly.Api, dataset: sly.DatasetInfo, project_id: int, project
         tag_meta = sly.TagMeta(dataset.name, sly.TagValueType.NONE)
         project_meta = project_meta.add_tag_meta(tag_meta)
         api.project.update_meta(project_id, project_meta)
-    if tag_meta.value_type != 'none':
-        sly.logger.error('Invalid TagMeta Value Type')
+    if tag_meta.value_type != sly.TagValueType.NONE:
+        sly.logger.error('TagMeta already exist in ProjectMeta but TagValueType is not NONE. Wrong TagValueType: %s', tag_meta.value_type, exc_info=1)
         raise ValueError(tag_meta.value_type)
     
     # Create Tag
