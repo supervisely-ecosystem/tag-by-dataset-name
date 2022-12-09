@@ -1,6 +1,8 @@
 import os
+import sys
 from dotenv import load_dotenv
 import supervisely as sly
+from supervisely._utils import batched
 
 
 def tag_dataset(
@@ -17,25 +19,22 @@ def tag_dataset(
         tag_meta = sly.TagMeta(dataset.name, sly.TagValueType.NONE)
         project_meta = project_meta.add_tag_meta(tag_meta)
         api.project.update_meta(project_id, project_meta)
+        project_meta_json = api.project.get_meta(project_id)
+        project_meta = sly.ProjectMeta.from_json(project_meta_json)
+        tag_meta = project_meta.get_tag_meta(dataset.name)
     if tag_meta.value_type != sly.TagValueType.NONE:
-        sly.logger.error(
+        sly.logger.warning(
             f'TagMeta already exist in ProjectMeta but TagValueType is not "{sly.TagValueType.NONE}". Wrong TagValueType: "{tag_meta.value_type}"'
         )
-        raise ValueError(tag_meta.value_type)
+        return
 
-    # Create Tag
-    tag = sly.Tag(tag_meta, value=None)
-
-    # Get Images Ids and Annotations
-    img_ids = [img.id for img in api.image.get_list(dataset.id)]
-    ann_jsons = api.annotation.download_json_batch(dataset.id, img_ids)
-    anns = [sly.Annotation.from_json(ann_json, project_meta) for ann_json in ann_jsons]
-
-    # Update Annotations
-    anns = [ann if tag in ann.img_tags else ann.add_tag(tag) for ann in anns]
-
-    # Upload updated annotations
-    api.annotation.upload_anns(img_ids, anns)
+    images = api.image.get_list(dataset.id)
+    for batch in batched(images):
+        img_ids = []
+        for image_info in batch:
+            if tag_meta.sly_id not in [tag["tagId"] for tag in image_info.tags]:
+                img_ids.append(image_info.id)
+        api.image.add_tag_batch(img_ids, tag_meta.sly_id)
 
 
 if __name__ == "__main__":
