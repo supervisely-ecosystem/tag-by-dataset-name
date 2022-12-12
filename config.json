@@ -14,5 +14,7 @@
   "context_menu": {
     "target": ["images_project", "images_dataset"],
     "context_root": "Transform"
-  }
+  },
+  "release": { "version":"v1.0.0", "name":"init" },
+  "slug": "niko/test-tag-by-dataset-name"
 }
