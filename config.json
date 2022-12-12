@@ -13,8 +13,9 @@
   "entrypoint": "python src/main.py",
   "context_menu": {
     "target": ["images_project", "images_dataset"],
-    "context_root": "Transform"
+    "context_category": "Transform"
   },
+  "headless": true,
   "release": { "version":"v1.0.0", "name":"init" },
   "slug": "niko/test-tag-by-dataset-name"
 }
