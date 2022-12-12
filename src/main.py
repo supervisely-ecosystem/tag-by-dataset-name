@@ -39,9 +39,11 @@ def tag_dataset(
             )
             if not tags.has_key(tag_meta.name):
                 img_ids.append(image_info.id)
-        api.image.add_tag_batch(img_ids, tag_meta.sly_id, batch_size=batch_size)
+        api.image.add_tag_batch(
+            img_ids, tag_meta.sly_id, batch_size=batch_size, tag_meta=tag_meta
+        )
         if not progress is None:
-            progress.set_current_value(progress.current+len(batch))
+            progress.set_current_value(progress.current + len(batch))
 
 
 if __name__ == "__main__":
@@ -68,7 +70,7 @@ if __name__ == "__main__":
         total_imgs = dataset.images_count
         progress = sly.Progress("Processing", total_imgs)
         tag_dataset(api, dataset, project_id, project_meta, progress=progress)
-    
+
     if sly.is_production():
         task_id = sly.env.task_id()
         info = api.project.get_info_by_id(project_id)
