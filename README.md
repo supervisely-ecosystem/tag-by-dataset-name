@@ -26,15 +26,15 @@ Can be run through an images project or images dataset context menu.
 
 1. Go to your Workspace
 
-<img src="xxx">
+<img src="https://user-images.githubusercontent.com/115161827/208151799-466139a0-4620-47b3-81f6-f4baf446e606.png">
 
 2. Right click to the project/dataset and run app from context menu
 
-<img src="xxx">
+<img src="https://user-images.githubusercontent.com/115161827/208151802-60e57697-8f07-4b21-ab45-fab90b3040fc.png">
 
 
 ## Result
 
 As a result of running this app, you will be left with modified project/dataset, that has a tag on each image.
 
-<img src="xxx">
+<img src="https://user-images.githubusercontent.com/115161827/208151821-3df84880-0cf9-45d2-b9a1-fcedd1fd5dc6.png">

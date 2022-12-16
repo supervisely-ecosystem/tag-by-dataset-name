@@ -1,5 +1,5 @@
 {
-  "release": { "version":"v1.0.3", "name":"tag-by-dataset-name" },
+  "release": { "version":"v1.0.4", "name":"tag-by-dataset-name" },
   "slug": "niko/test-tag-by-dataset-name",
   "main_script": "src/main.py",
   "headless": true,
