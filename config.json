@@ -3,7 +3,7 @@
   "slug": "niko/test-tag-by-dataset-name",
   "main_script": "src/main.py",
   "headless": true,
-  "name": "Tag by dataset name",
+  "name": "Tag images by dataset name",
   "description": "Add dataset name tag to all images in project or dataset",
   "categories": [ 
     "images",
