@@ -28,7 +28,7 @@ Can be run through an images project or images dataset context menu.
 
 <img src="xxx">
 
-2. Right click to the project and run app from context menu
+2. Right click to the project/dataset and run app from context menu
 
 <img src="xxx">
 
