@@ -1,5 +1,5 @@
 <div align="center" markdown>
-<img src="https://user-images.githubusercontent.com/115161827/208094131-d3ab5fcf-3da3-476b-bd50-e563deaf9b72.jpg"/>  
+<img src="xxx"/>  
 
 # Tag by dataset name
 
@@ -26,15 +26,15 @@ Can be run through an images project or images dataset context menu.
 
 1. Go to your Workspace
 
-<img src="https://user-images.githubusercontent.com/115161827/207947458-acc8a67a-5274-4df4-88bb-661fb9815599.png">
+<img src="xxx">
 
 2. Right click to the project and run app from context menu
 
-<img src="https://user-images.githubusercontent.com/115161827/207949467-d45542ff-b7aa-41f1-b75a-65b8d6b891ba.gif">
+<img src="xxx">
 
 
 ## Result
 
 As a result of running this app, you will be left with modified project/dataset, that has a tag on each image.
 
-<img src="https://user-images.githubusercontent.com/115161827/207947931-295a385f-4235-4525-825b-7c3192dbd38e.png">
+<img src="xxx">
