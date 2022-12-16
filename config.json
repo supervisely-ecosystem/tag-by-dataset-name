@@ -8,7 +8,7 @@
     "annotation transformation",
     "data operations"
   ],
-  "icon": "",
+  "icon": "https://user-images.githubusercontent.com/115161827/208136200-8edf30f5-397b-49a3-8fb6-1d299008f922.jpg",
   "poster": "",
   "entrypoint": "python src/main.py",
   "context_menu": {
@@ -16,6 +16,6 @@
     "context_category": "Transform"
   },
   "headless": true,
-  "release": { "version":"v1.0.0", "name":"init" },
+  "release": { "version":"v1.0.1", "name":"tag-by-dataset-name" },
   "slug": "niko/test-tag-by-dataset-name"
 }
