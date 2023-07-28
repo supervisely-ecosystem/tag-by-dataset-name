@@ -7,7 +7,7 @@
     "main_script": "src/main.py",
     "headless": true,
     "name": "Tag images by dataset name",
-    "docker_image": "supervisely/data-operations:0.0.1",
+    "docker_image": "supervisely/data-operations:0.0.3",
     "description": "Add dataset name tag to all images in project or dataset",
     "categories": [
         "images",
