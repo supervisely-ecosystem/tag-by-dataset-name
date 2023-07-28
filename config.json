@@ -1,23 +1,27 @@
 {
-  "release": { "version":"v1.0.5", "name":"tag-by-dataset-name" },
-  "slug": "niko/test-tag-by-dataset-name",
-  "main_script": "src/main.py",
-  "headless": true,
-  "name": "Tag images by dataset name",
-  "docker_image": "supervisely/base-py-sdk:6.72.70",
-  "description": "Add dataset name tag to all images in project or dataset",
-  "categories": [ 
-    "images",
-    "annotation transformation",
-    "data operations"
-  ],
-  "context_menu": {
-    "context_category": "Transform",
-    "target": [
-      "images_project", "images_dataset"
-    ]
-  },
-  "icon": "https://user-images.githubusercontent.com/115161827/208151202-ccc4970b-cb69-4eba-8152-6d64d67ce9ab.jpg",
-  "icon_cover": true,
-  "poster": "https://user-images.githubusercontent.com/115161827/208150096-6d070ec8-1300-4afc-98a5-e7c596d54321.png?v=2"
+    "release": {
+        "version": "v1.0.5",
+        "name": "tag-by-dataset-name"
+    },
+    "slug": "niko/test-tag-by-dataset-name",
+    "main_script": "src/main.py",
+    "headless": true,
+    "name": "Tag images by dataset name",
+    "docker_image": "supervisely/data-operations:0.0.1",
+    "description": "Add dataset name tag to all images in project or dataset",
+    "categories": [
+        "images",
+        "annotation transformation",
+        "data operations"
+    ],
+    "context_menu": {
+        "context_category": "Transform",
+        "target": [
+            "images_project",
+            "images_dataset"
+        ]
+    },
+    "icon": "https://user-images.githubusercontent.com/115161827/208151202-ccc4970b-cb69-4eba-8152-6d64d67ce9ab.jpg",
+    "icon_cover": true,
+    "poster": "https://user-images.githubusercontent.com/115161827/208150096-6d070ec8-1300-4afc-98a5-e7c596d54321.png?v=2"
 }
